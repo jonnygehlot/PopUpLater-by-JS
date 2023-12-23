@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pop up</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+
+        }
+
+        div {
+            width: 600px;
+            height: 600px;
+            position: fixed;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            top: -100%;
+            transition: 1s;
+            background-color: aqua;
+        }
+
+        .show {
+            top: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+    </div>
+</body>
+<script>
+    var div = document.querySelector('div')
+    var i = Number(localStorage.getItem('i')) ?? 0;
+    var date = new Date()
+    var currentTime = date.getTime();
+    var day = date.getDate();
+    var m = date.getMonth();
+    var month = months[m];
+    var year = date.getFullYear();
+    todayDate = new Date(`${day} ${month} ${year} 23:59:59`);
+    months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    window.addEventListener('load', () => {
+        if (i == 0) {
+            if (currentTime > todayDate) {
+                localStorage.setItem('i', 0);
+            }
+            setTimeout(() => {
+                div.classList.add('show')
+                i++;
+                localStorage.setItem('i', i)
+            }, 2000)
+        }
+    })
+</script>
+
+</html>
